@@ -1,19 +1,11 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
-import React from 'react';
-
+import React, {Fragment} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
   ScrollView,
   View,
   Text,
+  Button,
   Image,
   StatusBar,
 } from 'react-native';
@@ -26,19 +18,39 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import Intro from '../components/Intro';
 
-import Home from './src/screens/Home';
-
-const AppNavigator = createStackNavigator({
-  Home: { screen: Home },
-});
-
-const AppContainer = createAppContainer(AppNavigator);
-
-export default class App extends React.Component {
+export default class HomeScreen extends React.Component {
   render() {
-    return <AppContainer />;
+    return (
+      <Fragment>
+      <StatusBar barStyle="dark-content" />
+      <SafeAreaView>
+        <ScrollView
+          contentInsetAdjustmentBehavior="automatic" //This property specifies how the safe area insets are used to modify the content area of the scroll view.
+          style={styles.scrollView}>
+          {/* <Header
+            <Intro>
+          /> */}
+
+          <Intro></Intro>
+         
+          <View style={styles.body}>
+            <Text style={styles.introTitle}> TRICKHANA </Text>
+            <Image 
+            source={require("../../public/images/unicorn.png")}
+            style={{width: 200, height: 200}}
+            />
+            <Button 
+            // onPress={}
+            title="Login"
+            color="#841584"
+            accessibilityLabel="Go to login" />
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </Fragment>
+    )
   }
 }
 
@@ -56,7 +68,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     alignItems: "center",
     display: "flex",
-    paddingTop: 220
+    paddingTop: 170
   },
   sectionContainer: {
     marginTop: 32,
