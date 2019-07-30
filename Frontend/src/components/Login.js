@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
   errorMess: {
-    color: red,
+    color: 'red',
   }
 });
 
