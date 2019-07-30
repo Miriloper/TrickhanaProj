@@ -18,8 +18,10 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import Login from '../components/Login';
 
-export default class Login extends React.Component {
+
+export default class LoginScreen extends React.Component {
   render() {
     return (
       <Fragment>
@@ -31,6 +33,7 @@ export default class Login extends React.Component {
          
           <View style={styles.body}>
             <Text style={styles.introTitle}> TRICKHANA LOGIN</Text>
+            <Login></Login>
           </View>
           
         </ScrollView>

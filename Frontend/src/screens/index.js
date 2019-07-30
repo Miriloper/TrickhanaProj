@@ -1,5 +1,5 @@
 import Home from './Home';
-import Login from './Login';
+import Login from './LoginScreen';
 import Play from './Play';
 import Settings from './Settings';
 

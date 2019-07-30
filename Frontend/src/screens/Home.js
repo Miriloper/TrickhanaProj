@@ -35,7 +35,7 @@ export default class Home extends React.Component {
                 style={{ width: 200, height: 200 }}
               />
               <Button
-                // onPress={}
+                onPress={() => this.props.navigation.navigate("Login")}
                 title="Login"
                 color="#841584"
                 accessibilityLabel="Go to login screen"
