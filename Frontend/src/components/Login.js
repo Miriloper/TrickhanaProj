@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import AuthServices from '../Services/Services'
 import { Text, StyleSheet, Button, View, FormLabel, FormInput, FormValidationMessage } from 'react-native'
+//import ReactNativeComponentTree from 'react-native';
 
 import {
   Colors
@@ -18,6 +19,7 @@ export default class Login extends Component {
     event.preventDefault();
     const username = this.state.username;
     const password = this.state.password;
+    
     this.service.login(username, password)
     .then( response => {
         this.setState({ username: "", password: "" });
