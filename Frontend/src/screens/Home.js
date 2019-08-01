@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import {
+  AsyncStorage,
   SafeAreaView,
   StyleSheet,
   ScrollView,
@@ -10,13 +11,43 @@ import {
   StatusBar
 } from "react-native";
 
+//import AsyncStorage from '@react-native-community/async-storage';
+
 import { Colors } from "react-native/Libraries/NewAppScreen";
 
 import Logo from "../components/Logo";
 import CoolButton from "../components/CoolButton";
 
 export default class Home extends React.Component {
+
+  constructor(){
+    super();
+    this.user = null;
+  }
+
+   componentDidMount() {
+    this.getUserLocStorage();
+  }
+
+  getUserLocStorage = async () => {
+    try {
+      let logUser = await AsyncStorage.getItem('USER');
+      if (logUser !== null) {
+        this.setState({ logUser })
+        console.log(this.user)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  } 
+
   render() {
+
+    // if (this.state.user !== null) {
+    //   <Text> {this.state.user} </Text>
+    // }
+
+    // else 
     return (
       <Fragment>
         <StatusBar barStyle="dark-content" />
@@ -34,6 +65,7 @@ export default class Home extends React.Component {
                 source={require("../../public/images/unicorn.png")}
                 style={{ width: 200, height: 200 }}
               />
+              {/* <Text> {this.state.user} </Text> */}
               <Button
                 onPress={() => this.props.navigation.navigate("Login")}
                 title="Login"

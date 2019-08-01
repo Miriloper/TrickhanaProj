@@ -21,20 +21,19 @@ export default class Signup extends Component {
    
   handleFormSubmit = (event) => {
   // handleFormSubmit = (event) => {
+    console.log(event)
     event.preventDefault();
     const username = this.state.username;
     const password = this.state.password;
 
-    //aquí llamamos al endpoint /signup de nuestra API Rest usando nuestro AuthService
     this.service.signup(username, password)
     .then( response => {
+      console.log('patata')
+      console.log(response)
         this.setState({
             username: "", 
             password: "",
         });
-        //aquí elevamos el nuevo usuario una vez creado a App usando getUser via props
-        //por tanto, informamos a App de que el nuevo usuario ha sido creado, provocando un re-render
-        //y mostrando la parte de contenidos. Mira la función getUser de App para más info (date cuenta de que establece el state de App)
         this.props.getUser(response.user)
     })
     .catch(error => console.log(error))

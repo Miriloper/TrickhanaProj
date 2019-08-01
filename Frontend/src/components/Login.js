@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import AuthServices from '../Services/Services'
-import { Text, TextInput, StyleSheet, ScrollView, Button, View, FormLabel, FormInput, FormValidationMessage } from 'react-native'
-//import ReactNativeComponentTree from 'react-native';
+import {Text, TextInput, StyleSheet, ScrollView, Button, View, FormLabel, FormInput, FormValidationMessage } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage';
 
 import {
   Colors
@@ -26,18 +26,12 @@ export default class Login extends Component {
     this.service.login(username, password)
     .then( response => {
         this.setState({ username: "", password: "" });
-        this.props.getUser(response)
+        // this.props.getUser(response)
+        console.log(response)
+        this._storeData(response)
     })
     .catch( error => console.log(error) )
   }
-
-  // handleChange = (event) => {  
-  //   console.log('holaa')
-  //   console.log(event)
-  //   console.log('holaa2')
-  //   const {name, value} = event;
-  //   this.setState({[name]: value});
-  // }
 
   handleNameChange = username => {
     this.setState({ username });
@@ -46,16 +40,19 @@ export default class Login extends Component {
     this.setState({ password });
   };
 
+  _storeData = async (user) => {
+    try {
+      await AsyncStorage.setItem('USER', user);
+      // Redirect to Home/Play
+    } catch (error) {
+      // Error saving data
+    }
+  };
+
   render() {
     return (
       <ScrollView>
         <View>
-          {/* <Text> Soy el login </Text>
-          <FormLabel>CUSTOM_NAME</FormLabel>
-          <FormInput onChangeText={this.handleChange()}/>
-          <FormValidationMessage
-          style={styles.errorMess} >This field is required</FormValidationMessage>
-          <Button>LOG IN</Button> */}
 
           <TextInput
             placeholder="Username"
@@ -78,11 +75,6 @@ export default class Login extends Component {
             color="white"
             accessibilityLabel="Log in the app"
             />
-            {/* <TouchableOpacity
-              onPress={this.handleFormSubmit}
-            >
-              <Text>LogIn</Text>
-            </TouchableOpacity> */}
           </View>
 
         </View>
