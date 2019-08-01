@@ -1,3 +1,4 @@
+// auth/Signup.js
 import React, { Component } from 'react'
 import AuthServices from '../Services/Services'
 import { Text, TextInput, StyleSheet, ScrollView, Button, View, FormLabel, FormInput, FormValidationMessage } from 'react-native'
@@ -9,33 +10,38 @@ import {
 
 import CoolButton from './CoolButton';
 
-export default class Login extends Component {
-
+//signup y login son iguales a excepción de el html renderizado y el endpoint de nuestra API rest a la que llamamos
+//uno llama a /signup y el otro a /login usando nuestro AuthService
+export default class Signup extends Component {
   constructor(props){
     super(props);
     this.state = { username: '', password: '' };
     this.service = new AuthServices();
   }
-
-  handleFormSubmit = () => {
-    //handleFormSubmit = (event) => {
-    //event.preventDefault();
+   
+  handleFormSubmit = (event) => {
+  // handleFormSubmit = (event) => {
+    event.preventDefault();
     const username = this.state.username;
     const password = this.state.password;
-    
-    this.service.login(username, password)
+
+    //aquí llamamos al endpoint /signup de nuestra API Rest usando nuestro AuthService
+    this.service.signup(username, password)
     .then( response => {
-        this.setState({ username: "", password: "" });
-        this.props.getUser(response)
+        this.setState({
+            username: "", 
+            password: "",
+        });
+        //aquí elevamos el nuevo usuario una vez creado a App usando getUser via props
+        //por tanto, informamos a App de que el nuevo usuario ha sido creado, provocando un re-render
+        //y mostrando la parte de contenidos. Mira la función getUser de App para más info (date cuenta de que establece el state de App)
+        this.props.getUser(response.user)
     })
-    .catch( error => console.log(error) )
+    .catch(error => console.log(error))
   }
 
   // handleChange = (event) => {  
-  //   console.log('holaa')
-  //   console.log(event)
-  //   console.log('holaa2')
-  //   const {name, value} = event;
+  //   const {name, value} = event.target;
   //   this.setState({[name]: value});
   // }
 
@@ -45,17 +51,12 @@ export default class Login extends Component {
   handlePasswordChange = password => {
     this.setState({ password });
   };
+      
 
   render() {
     return (
       <ScrollView>
         <View>
-          {/* <Text> Soy el login </Text>
-          <FormLabel>CUSTOM_NAME</FormLabel>
-          <FormInput onChangeText={this.handleChange()}/>
-          <FormValidationMessage
-          style={styles.errorMess} >This field is required</FormValidationMessage>
-          <Button>LOG IN</Button> */}
 
           <TextInput
             placeholder="Username"
@@ -74,15 +75,10 @@ export default class Login extends Component {
           <View>
             <CoolButton 
             onPress={this.handleFormSubmit}
-            title='Login'
+            title='Sign Up'
             color="white"
-            accessibilityLabel="Log in the app"
+            accessibilityLabel="Sign up in the app"
             />
-            {/* <TouchableOpacity
-              onPress={this.handleFormSubmit}
-            >
-              <Text>LogIn</Text>
-            </TouchableOpacity> */}
           </View>
 
         </View>
@@ -139,5 +135,4 @@ const styles = StyleSheet.create({
     color: 'red',
   }
 });
-
 

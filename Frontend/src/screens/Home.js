@@ -40,6 +40,12 @@ export default class Home extends React.Component {
                 color="#841584"
                 accessibilityLabel="Go to login screen"
               />
+              <Button
+                onPress={() => this.props.navigation.navigate("SignUp")}
+                title="Sign Up"
+                color="#841584"
+                accessibilityLabel="Go to signup screen"
+              />
               <View style={styles.footer}>
                 <CoolButton
                   onPress={() => this.props.navigation.navigate("Play")}

@@ -3,7 +3,7 @@ import axios from 'axios';
 export default class AuthServices {
   constructor(){
     this.service = axios.create({
-      baseURL: 'http://localhost:3000/auth',
+      baseURL: 'https://trickhana.herokuapp.com/auth/',
       withCredentials: true
     })
   }
