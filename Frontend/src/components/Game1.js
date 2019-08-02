@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -8,16 +8,16 @@ import {
   Button,
   Image,
   StatusBar,
-} from 'react-native';
+  ImageBackground
+} from "react-native";
 
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 import CoolButton from "./CoolButton";
 
 import AsyncStorage from "@react-native-community/async-storage";
 
 export default class Game1 extends React.Component {
-
   constructor() {
     super();
     this.state = {
@@ -27,93 +27,101 @@ export default class Game1 extends React.Component {
 
   setLocalCounter = async count => {
     try {
-      await AsyncStorage.setItem('COUNTER', count)
-      .then(() => {console.log(count)});
+      await AsyncStorage.setItem("COUNTER", count).then(() => {
+        console.log(count);
+      });
       // Redirect to Home/Play
     } catch (error) {
-      console.log('Entro en el catch')
+      console.log("Entro en el catch");
       // Error saving data
     }
   };
 
-  changeStorage = (a) => {
+  changeStorage = a => {
+    this.setLocalCounter(a).then(this.props.gettingGame(a));
+  };
 
-    this.setLocalCounter(a)
-    .then(
-      this.props.gettingGame(a)
-    )
-      }
-
-    isPassed = () => {
-      this.setState({
-        ...this.state,
-        passed: true
-      })
-    }
+  isPassed = () => {
+    this.setState({
+      ...this.state,
+      passed: true
+    });
+  };
 
   render() {
     if (this.state.passed == false) {
       return (
-        <Fragment>
-        <StatusBar barStyle="dark-content" />
-        <SafeAreaView>
-          <ScrollView
-            contentInsetAdjustmentBehavior="automatic" //This property specifies how the safe area insets are used to modify the content area of the scroll view.
-            style={styles.scrollView}>
-          
-            <View style={styles.body}>
-              <Text style={styles.introTitle}> TRICKHANA GAME 1</Text>
-            </View>
-
-            <CoolButton 
-            onPress={()=>{this.isPassed()}}
-            title="Passed"
-            color="white"
-            accessibilityLabel="Go to passed"
-            />
-
-          </ScrollView>
-        </SafeAreaView>
-      </Fragment>
-      )
-      } else {
-        return (
+        <ImageBackground
+          source={require("../../public/images/iphone-calling.png")}
+          style={{ width: "100%", height: "100%" }}
+        >
           <Fragment>
+            <StatusBar barStyle="dark-content" />
+            <SafeAreaView>
+              <ScrollView
+                contentInsetAdjustmentBehavior="automatic" //This property specifies how the safe area insets are used to modify the content area of the scroll view.
+                style={styles.scrollView}
+              >
+                {/* <View style={styles.body}> */}
+
+                <CoolButton
+                  style={styles.smBut}
+                  onPress={() => {
+                    this.isPassed();
+                  }}
+                  title="Passed"
+                  color="white"
+                  accessibilityLabel="Go to passed"
+                />
+                {/* <Text style={styles.introTitle}> TRICKHANA GAME 1</Text> */}
+                {/* </View> */}
+                {/* <ImageBackground source={{uri: 'https://todaslasplantas.com/4255-large_default/amapola-artificial-70cm.jpg'}} style={{width: '100%', height: '100%'}}>
+            </ImageBackground> */}
+              </ScrollView>
+            </SafeAreaView>
+          </Fragment>
+        </ImageBackground>
+      );
+    } else {
+      return (
+        <Fragment>
           <StatusBar barStyle="dark-content" />
           <SafeAreaView>
             <ScrollView
               contentInsetAdjustmentBehavior="automatic" //This property specifies how the safe area insets are used to modify the content area of the scroll view.
-              style={styles.scrollView}>
-            
+              style={styles.scrollView}
+            >
               <View style={styles.body}>
                 <Text style={styles.introTitle}> </Text>
               </View>
-  
-              <CoolButton 
-              onPress={()=>{this.changeStorage(2)}}
-              title="NEXT"
-              color="white"
-              accessibilityLabel="Go to next level"
+
+              <CoolButton
+                onPress={() => {
+                  this.changeStorage(2);
+                }}
+                title="NEXT"
+                color="white"
+                accessibilityLabel="Go to next level"
               />
-  
             </ScrollView>
           </SafeAreaView>
         </Fragment>
-        )
-      }
+      );
+    }
   }
 }
 
 const styles = StyleSheet.create({
   scrollView: {
-    backgroundColor: Colors.lighter,
+    backgroundColor: Colors.lighter
   },
   engine: {
-    position: 'absolute',
-    right: 0,
+    position: "absolute",
+    right: 0
   },
   body: {
-    backgroundColor: Colors.white,
+    // backgroundColor: 'transparent',
+    backgroundColor: "white",
     justifyContent: "center",
     textAlign: "center",
     alignItems: "center",
@@ -122,11 +130,11 @@ const styles = StyleSheet.create({
   },
   sectionContainer: {
     marginTop: 32,
-    paddingHorizontal: 24,
+    paddingHorizontal: 24
   },
   introTitle: {
     fontSize: 24,
-    fontWeight: '600',
+    fontWeight: "600",
     color: Colors.black,
     paddingBottom: 20,
     fontFamily: "Avenir"
@@ -134,19 +142,22 @@ const styles = StyleSheet.create({
   sectionDescription: {
     marginTop: 8,
     fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
+    fontWeight: "400",
+    color: Colors.dark
   },
   highlight: {
-    fontWeight: '700',
+    fontWeight: "700"
   },
   footer: {
     color: Colors.dark,
     fontSize: 12,
-    fontWeight: '600',
+    fontWeight: "600",
     padding: 4,
     paddingRight: 12,
-    textAlign: 'right',
+    textAlign: "right"
   },
+  smBut: {
+    maxHeight: 20,
+    maxWidth: 20
+  }
 });
-

@@ -7,7 +7,8 @@ import {
   Text,
   Button,
   Image,
-  StatusBar
+  StatusBar,
+  ImageBackground
 } from "react-native";
 
 import { Colors } from "react-native/Libraries/NewAppScreen";
@@ -50,6 +51,33 @@ export default class Game5 extends React.Component {
   render() {
     if (this.state.passed == false) {
       return (
+        <ImageBackground source={require('../../public/images/purpurina-whitegold.png')} style={{width: '100%', height: '100%'}}>
+        <Fragment>
+          <StatusBar barStyle="dark-content" />
+          <SafeAreaView>
+            <ScrollView
+              contentInsetAdjustmentBehavior="automatic" //This property specifies how the safe area insets are used to modify the content area of the scroll view.
+              style={styles.scrollView}
+            >
+              {/* <View style={styles.body}>
+                <Text style={styles.introTitle}> TRICKHANA GAME 5 </Text>
+              </View> */}
+
+              <CoolButton
+                onPress={() => {
+                  this.isPassed();
+                }}
+                title="Passed"
+                color="white"
+                accessibilityLabel="Go to passed"
+              />
+            </ScrollView>
+          </SafeAreaView>
+        </Fragment>
+        </ImageBackground>
+      );
+    } else {
+      return (
         <Fragment>
           <StatusBar barStyle="dark-content" />
           <SafeAreaView>
@@ -63,31 +91,6 @@ export default class Game5 extends React.Component {
 
               <CoolButton
                 onPress={() => {
-                  this.isPassed();
-                }}
-                title="Passed"
-                color="white"
-                accessibilityLabel="Go to passed"
-              />
-            </ScrollView>
-          </SafeAreaView>
-        </Fragment>
-      );
-    } else {
-      return (
-        <Fragment>
-          <StatusBar barStyle="dark-content" />
-          <SafeAreaView>
-            <ScrollView
-              contentInsetAdjustmentBehavior="automatic" //This property specifies how the safe area insets are used to modify the content area of the scroll view.
-              style={styles.scrollView}
-            >
-              <View style={styles.body}>
-                <Text style={styles.introTitle}> TRICKHANA GAME 5</Text>
-              </View>
-
-              <CoolButton
-                onPress={() => {
                   this.changeStorage(6);
                 }}
                 title="NEXT"
@@ -97,6 +100,7 @@ export default class Game5 extends React.Component {
             </ScrollView>
           </SafeAreaView>
         </Fragment>
+        
       );
     }
   }

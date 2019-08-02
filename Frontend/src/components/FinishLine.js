@@ -8,6 +8,7 @@ import {
   Button,
   Image,
   StatusBar,
+  ImageBackground
 } from 'react-native';
 
 import { Colors } from 'react-native/Libraries/NewAppScreen';
@@ -36,12 +37,13 @@ export default class FinishLine extends React.Component {
   changeStorage = (a) => {
 
     this.setLocalCounter(a)
-    
+
       }
 
   render() {
 
     return (
+      <ImageBackground source={{uri: 'https://image.shutterstock.com/image-vector/you-win-message-word-bubble-260nw-683951887.jpg'}} style={{width: '100%', height: '100%'}}>
       <Fragment>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
@@ -49,13 +51,14 @@ export default class FinishLine extends React.Component {
           contentInsetAdjustmentBehavior="automatic" //This property specifies how the safe area insets are used to modify the content area of the scroll view.
           style={styles.scrollView}>
          
-          <View style={styles.body}>
+          {/* <View style={styles.body}>
             <Text style={styles.introTitle}> YOU WIN</Text>
-          </View>
+          </View> */}
 
         </ScrollView>
       </SafeAreaView>
     </Fragment>
+    </ImageBackground>
     )
   }
 }
@@ -83,9 +86,10 @@ const styles = StyleSheet.create({
   introTitle: {
     fontSize: 24,
     fontWeight: '600',
-    color: Colors.black,
-    paddingBottom: 20,
-    fontFamily: "Avenir"
+    color: 'white',
+    padding: 20,
+    fontFamily: "Avenir",
+    maxHeight: 60
   },
   sectionDescription: {
     marginTop: 8,

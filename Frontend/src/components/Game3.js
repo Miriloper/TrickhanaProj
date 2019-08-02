@@ -7,7 +7,8 @@ import {
   Text,
   Button,
   Image,
-  StatusBar
+  StatusBar,
+  ImageBackground
 } from "react-native";
 
 import { Colors } from "react-native/Libraries/NewAppScreen";
@@ -50,6 +51,7 @@ export default class Game3 extends React.Component {
   render() {
     if (this.state.passed == false) {
       return (
+        <ImageBackground source={require('../../public/images/jesus-nos-ilumina.png')} style={{width: '100%', height: '100%'}}>
         <Fragment>
           <StatusBar barStyle="dark-content" />
           <SafeAreaView>
@@ -57,9 +59,9 @@ export default class Game3 extends React.Component {
               contentInsetAdjustmentBehavior="automatic" //This property specifies how the safe area insets are used to modify the content area of the scroll view.
               style={styles.scrollView}
             >
-              <View style={styles.body}>
-                <Text style={styles.introTitle}> </Text>
-              </View>
+              {/* <View style={styles.body}>
+                <Text style={styles.introTitle}> TRICKHANA GAME 3 </Text>
+              </View> */}
 
               <CoolButton
                 onPress={() => {
@@ -72,6 +74,7 @@ export default class Game3 extends React.Component {
             </ScrollView>
           </SafeAreaView>
         </Fragment>
+        </ImageBackground>
       );
     } else {
       return (
@@ -83,7 +86,7 @@ export default class Game3 extends React.Component {
               style={styles.scrollView}
             >
               <View style={styles.body}>
-                <Text style={styles.introTitle}> TRICKHANA GAME 3</Text>
+                <Text style={styles.introTitle}> </Text>
               </View>
 
               <CoolButton
