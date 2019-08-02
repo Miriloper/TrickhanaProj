@@ -18,6 +18,13 @@ import AsyncStorage from "@react-native-community/async-storage";
 
 export default class Game1 extends React.Component {
 
+  constructor() {
+    super();
+    this.state = {
+      passed: false
+    };
+  }
+
   setLocalCounter = async count => {
     try {
       await AsyncStorage.setItem('COUNTER', count)
@@ -37,31 +44,63 @@ export default class Game1 extends React.Component {
     )
       }
 
+    isPassed = () => {
+      this.setState({
+        ...this.state,
+        passed: true
+      })
+    }
+
   render() {
+    if (this.state.passed == false) {
+      return (
+        <Fragment>
+        <StatusBar barStyle="dark-content" />
+        <SafeAreaView>
+          <ScrollView
+            contentInsetAdjustmentBehavior="automatic" //This property specifies how the safe area insets are used to modify the content area of the scroll view.
+            style={styles.scrollView}>
+          
+            <View style={styles.body}>
+              <Text style={styles.introTitle}> TRICKHANA GAME 1</Text>
+            </View>
 
-    return (
-      <Fragment>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic" //This property specifies how the safe area insets are used to modify the content area of the scroll view.
-          style={styles.scrollView}>
-         
-          <View style={styles.body}>
-            <Text style={styles.introTitle}> TRICKHANA GAME 1</Text>
-          </View>
+            <CoolButton 
+            onPress={()=>{this.isPassed()}}
+            title="Passed"
+            color="white"
+            accessibilityLabel="Go to passed"
+            />
 
-          <CoolButton 
-          onPress={()=>{this.changeStorage(2)}}
-          title="NEXT"
-          color="white"
-          accessibilityLabel="Go to next level"
-           />
-
-        </ScrollView>
-      </SafeAreaView>
-    </Fragment>
-    )
+          </ScrollView>
+        </SafeAreaView>
+      </Fragment>
+      )
+      } else {
+        return (
+          <Fragment>
+          <StatusBar barStyle="dark-content" />
+          <SafeAreaView>
+            <ScrollView
+              contentInsetAdjustmentBehavior="automatic" //This property specifies how the safe area insets are used to modify the content area of the scroll view.
+              style={styles.scrollView}>
+            
+              <View style={styles.body}>
+                <Text style={styles.introTitle}> </Text>
+              </View>
+  
+              <CoolButton 
+              onPress={()=>{this.changeStorage(2)}}
+              title="NEXT"
+              color="white"
+              accessibilityLabel="Go to next level"
+              />
+  
+            </ScrollView>
+          </SafeAreaView>
+        </Fragment>
+        )
+      }
   }
 }
 
