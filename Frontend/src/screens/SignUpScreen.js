@@ -33,7 +33,7 @@ export default class SignUpScreen extends React.Component {
           >
             <View style={styles.body}>
               <Text style={styles.introTitle}> TRICKHANA SIGNUP</Text>
-              <Signup />
+              <Signup navigation={this.props.navigation} />
             </View>
           </ScrollView>
         </SafeAreaView>

@@ -33,7 +33,7 @@ export default class LoginScreen extends React.Component {
          
           <View style={styles.body}>
             <Text style={styles.introTitle}> TRICKHANA LOGIN</Text>
-            <Login></Login>
+            <Login navigation={this.props.navigation}></Login>
           </View>
           
         </ScrollView>

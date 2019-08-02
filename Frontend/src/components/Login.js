@@ -1,19 +1,29 @@
-import React, { Component } from 'react'
-import AuthServices from '../Services/Services'
-import {Text, TextInput, StyleSheet, ScrollView, Button, View, FormLabel, FormInput, FormValidationMessage } from 'react-native'
+import React, { Component } from "react";
+import AuthServices from "../Services/Services";
+import {
+  Text,
+  TextInput,
+  StyleSheet,
+  ScrollView,
+  Button,
+  View,
+  FormLabel,
+  FormInput,
+  FormValidationMessage
+} from "react-native";
 import AsyncStorage from '@react-native-community/async-storage';
 
-import {
-  Colors
-} from 'react-native/Libraries/NewAppScreen';
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
-import CoolButton from './CoolButton';
+
+import CoolButton from "./CoolButton";
+
+
 
 export default class Login extends Component {
-
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state = { username: '', password: '' };
+    this.state = { username: "", password: "" };
     this.service = new AuthServices();
   }
 
@@ -22,16 +32,22 @@ export default class Login extends Component {
     //event.preventDefault();
     const username = this.state.username;
     const password = this.state.password;
-    
-    this.service.login(username, password)
-    .then( response => {
+
+    this.service
+      .login(username, password)
+      .then(response => {
         this.setState({ username: "", password: "" });
-        // this.props.getUser(response)
-        console.log(response)
-        this._storeData(response)
-    })
-    .catch( error => console.log(error) )
-  }
+        console.log(response);
+        this._storeData(response);
+        //this.goToPlay();
+      })
+      .catch(error => console.log(error));
+  };
+
+  goToPlay = (response) => {
+    console.log("naranja");
+    this.props.navigation.navigate('Home', {user: response});
+  };
 
   handleNameChange = username => {
     this.setState({ username });
@@ -40,11 +56,13 @@ export default class Login extends Component {
     this.setState({ password });
   };
 
-  _storeData = async (user) => {
+  _storeData = async user => {
     try {
-      await AsyncStorage.setItem('USER', user);
+      await AsyncStorage.setItem('USER', JSON.stringify(user))
+      .then(this.goToPlay(user));
       // Redirect to Home/Play
     } catch (error) {
+      console.log('Entro en el catch')
       // Error saving data
     }
   };
@@ -53,7 +71,6 @@ export default class Login extends Component {
     return (
       <ScrollView>
         <View>
-
           <TextInput
             placeholder="Username"
             maxLength={20}
@@ -69,27 +86,26 @@ export default class Login extends Component {
             onChangeText={this.handlePasswordChange}
           />
           <View>
-            <CoolButton 
-            onPress={this.handleFormSubmit}
-            title='Login'
-            color="white"
-            accessibilityLabel="Log in the app"
+            <CoolButton
+              onPress={this.handleFormSubmit}
+              title="Login"
+              color="white"
+              accessibilityLabel="Log in the app"
             />
           </View>
-
         </View>
-        </ScrollView>
-    )
+      </ScrollView>
+    );
   }
 }
 
 const styles = StyleSheet.create({
   scrollView: {
-    backgroundColor: Colors.lighter,
+    backgroundColor: Colors.lighter
   },
   engine: {
-    position: 'absolute',
-    right: 0,
+    position: "absolute",
+    right: 0
   },
   body: {
     backgroundColor: Colors.white,
@@ -101,11 +117,11 @@ const styles = StyleSheet.create({
   },
   sectionContainer: {
     marginTop: 32,
-    paddingHorizontal: 24,
+    paddingHorizontal: 24
   },
   introTitle: {
     fontSize: 24,
-    fontWeight: '600',
+    fontWeight: "600",
     color: Colors.black,
     paddingBottom: 20,
     fontFamily: "Avenir"
@@ -113,23 +129,21 @@ const styles = StyleSheet.create({
   sectionDescription: {
     marginTop: 8,
     fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
+    fontWeight: "400",
+    color: Colors.dark
   },
   highlight: {
-    fontWeight: '700',
+    fontWeight: "700"
   },
   footer: {
     color: Colors.dark,
     fontSize: 12,
-    fontWeight: '600',
+    fontWeight: "600",
     padding: 4,
     paddingRight: 12,
-    textAlign: 'right',
+    textAlign: "right"
   },
   errorMess: {
-    color: 'red',
+    color: "red"
   }
 });
-
-
