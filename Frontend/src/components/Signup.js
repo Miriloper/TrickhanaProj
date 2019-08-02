@@ -1,6 +1,7 @@
 // auth/Signup.js
 import React, { Component } from "react";
 import AuthServices from "../Services/Services";
+import AsyncStorage from '@react-native-community/async-storage';
 import {
   Text,
   TextInput,
@@ -12,7 +13,7 @@ import {
   FormInput,
   FormValidationMessage
 } from "react-native";
-//import ReactNativeComponentTree from 'react-native';
+
 
 import { Colors } from "react-native/Libraries/NewAppScreen";
 
@@ -36,21 +37,30 @@ export default class Signup extends Component {
 
     this.service
       .signup(username, password)
-      .then(response => {
-        console.log("patata");
-        console.log(response);
-        this.setState({
-          username: "",
-          password: ""
-        });
-        this.goToLogin();
-      })
-      .catch(error => console.log(error));
+      .then(
+        this.service.login(username, password)
+          .then(response => {
+            this.setState({ username: "", password: "" });
+            this._storeData(response);
+          })
+          .catch(error => console.log(error))
+      ).catch(error => console.log(error))
   };
 
-  goToLogin = () => {
-    console.log("naranja");
-    this.props.navigation.navigate("Login");
+  goToHome = (response) => {
+    console.log("naranjaSign");
+    this.props.navigation.navigate('Home', {user: response});
+  };
+
+  _storeData = async user => {
+    try {
+      await AsyncStorage.setItem('USER', JSON.stringify(user))
+      .then(this.goToHome(user));
+      // Redirect to Home/Play
+    } catch (error) {
+      console.log(error)
+      // Error saving data
+    }
   };
 
   handleNameChange = username => {

@@ -39,12 +39,13 @@ export default class Login extends Component {
         this.setState({ username: "", password: "" });
         console.log(response);
         this._storeData(response);
+        this.setLocalCounter(1);
         //this.goToPlay();
       })
       .catch(error => console.log(error));
   };
 
-  goToPlay = (response) => {
+  goToHome = (response) => {
     console.log("naranja");
     this.props.navigation.navigate('Home', {user: response});
   };
@@ -59,7 +60,18 @@ export default class Login extends Component {
   _storeData = async user => {
     try {
       await AsyncStorage.setItem('USER', JSON.stringify(user))
-      .then(this.goToPlay(user));
+      .then(this.goToHome(user));
+      // Redirect to Home/Play
+    } catch (error) {
+      console.log('Entro en el catch')
+      // Error saving data
+    }
+  };
+
+  setLocalCounter = async count => {
+    try {
+      await AsyncStorage.setItem('COUNTER', 1)
+      .then(() => {console.log(count)});
       // Redirect to Home/Play
     } catch (error) {
       console.log('Entro en el catch')

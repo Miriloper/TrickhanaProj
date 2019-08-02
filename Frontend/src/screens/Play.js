@@ -18,26 +18,103 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import AsyncStorage from "@react-native-community/async-storage";
+
+import Game1 from '../components/Game1';
+import Game2 from '../components/Game2';
+import Game3 from '../components/Game3';
+import Game4 from '../components/Game4';
+import Game5 from '../components/Game5';
+import FinishLine from '../components/FinishLine';
+
 
 export default class Play extends React.Component {
-  render() {
-    return (
-      <Fragment>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic" //This property specifies how the safe area insets are used to modify the content area of the scroll view.
-          style={styles.scrollView}>
-         
-          <View style={styles.body}>
-            <Text style={styles.introTitle}> TRICKHANA PLAY</Text>
-          </View>
 
-        </ScrollView>
-      </SafeAreaView>
-    </Fragment>
-    )
+  constructor() {
+    super();
+    this.state = {
+      counterGame: 1,
+      // actualGame: 'Game1',
+      // gameScreen: undefined
+    };
   }
+
+  componentDidMount(){
+    this.getActualGame()
+  }
+
+
+  getActualGame = async () => {
+    try {
+      let countCloud = await AsyncStorage.getItem("COUNTER");
+      let pepe
+      console.log(countCloud)
+      if (pepe = (countCloud == null) ? 1 : countCloud) {
+        console.log(pepe)
+        this.setState({
+          ...this.state,
+          counterGame: pepe
+        })
+      }
+      ;
+    } catch (error) {
+      console.log(error);
+    }
+    
+  }
+
+  getGame = (a) => {
+    
+    this.setState({
+      ...this.state,
+      counterGame: a
+    })
+    console.log(this.state.counterGame)
+    //this.forceUpdate();
+  }
+
+  render() {
+      if (this.state.counterGame == 1)
+      return <Game1 gettingGame={this.getGame}></Game1>
+      else if (this.state.counterGame == 2)
+      return <Game2 gettingGame={this.getGame}></Game2>
+      else if (this.state.counterGame == 3)
+      return <Game3 gettingGame={this.getGame}></Game3>
+      else if (this.state.counterGame == 4)
+      return <Game4 gettingGame={this.getGame}></Game4>
+      else if (this.state.counterGame == 5)
+      return <Game5 gettingGame={this.getGame}></Game5>
+      else if (this.state.counterGame == 6)
+      return <FinishLine></FinishLine>
+    }
+
+
+
+
+
+  // componentDidMount(){
+  //   this.getGame()
+  // }
+
+  // getGame = () => {
+  //   let result = '<Game' + this.state.counterGame + '>'
+  //   let resultTun = result.replace(/"/g, '')
+  //   console.log(resultTun)
+  //    this.setState({
+  //     ...this.state,
+  //     actualGame: result,
+  //     gameScreen: resultTun
+  //   })
+  //   return resultTun
+  // }
+
+  // render() {
+  //     // this.getGame()
+  //     return this.state.gameScreen
+ 
+  //   }
+
+  
 }
 
 const styles = StyleSheet.create({
