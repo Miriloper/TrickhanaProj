@@ -43,7 +43,7 @@ export default class FinishLine extends React.Component {
   render() {
 
     return (
-      <ImageBackground source={{uri: 'https://image.shutterstock.com/image-vector/you-win-message-word-bubble-260nw-683951887.jpg'}} style={{width: '100%', height: '100%'}}>
+      <ImageBackground source={require('../../public/images/goodJob.gif')} style={{width: '100%', height: '100%'}}>
       <Fragment>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>

@@ -57,14 +57,8 @@ export default class Game1 extends React.Component {
         >
           <Fragment>
             <StatusBar barStyle="dark-content" />
-            <SafeAreaView>
-              <ScrollView
-                contentInsetAdjustmentBehavior="automatic" //This property specifies how the safe area insets are used to modify the content area of the scroll view.
-                style={styles.scrollView}
-              >
-                {/* <View style={styles.body}> */}
 
-                <CoolButton
+            <CoolButton
                   style={styles.smBut}
                   onPress={() => {
                     this.isPassed();
@@ -73,12 +67,10 @@ export default class Game1 extends React.Component {
                   color="white"
                   accessibilityLabel="Go to passed"
                 />
-                {/* <Text style={styles.introTitle}> TRICKHANA GAME 1</Text> */}
-                {/* </View> */}
-                {/* <ImageBackground source={{uri: 'https://todaslasplantas.com/4255-large_default/amapola-artificial-70cm.jpg'}} style={{width: '100%', height: '100%'}}>
-            </ImageBackground> */}
-              </ScrollView>
-            </SafeAreaView>
+
+                
+            
+
           </Fragment>
         </ImageBackground>
       );
@@ -158,6 +150,32 @@ const styles = StyleSheet.create({
   },
   smBut: {
     maxHeight: 20,
-    maxWidth: 20
+    maxWidth: 20,
+    position: 'absolute'
   }
 });
+
+
+        // <SafeAreaView>
+        //       <ScrollView
+        //         contentInsetAdjustmentBehavior="automatic" //This property specifies how the safe area insets are used to modify the content area of the scroll view.
+        //         style={styles.scrollView}
+        //       >
+        //         {/* <View style={styles.body}> */}
+
+        //         <CoolButton
+        //           style={styles.smBut}
+        //           onPress={() => {
+        //             this.isPassed();
+        //           }}
+        //           title="Passed"
+        //           color="white"
+        //           accessibilityLabel="Go to passed"
+        //         />
+        //         {/* <Text style={styles.introTitle}> TRICKHANA GAME 1</Text> */}
+        //         {/* </View> */}
+        //         {/* <ImageBackground source={{uri: 'https://todaslasplantas.com/4255-large_default/amapola-artificial-70cm.jpg'}} style={{width: '100%', height: '100%'}}>
+        //     </ImageBackground> */}
+        //       </ScrollView>
+        //     </SafeAreaView>
+

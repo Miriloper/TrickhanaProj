@@ -51,19 +51,11 @@ export default class Game5 extends React.Component {
   render() {
     if (this.state.passed == false) {
       return (
-        <ImageBackground source={require('../../public/images/purpurina-whitegold.png')} style={{width: '100%', height: '100%'}}>
+        <ImageBackground source={require('../../public/images/purpurinaColorsForms.jpg')} style={{width: '100%', height: '100%'}}>
         <Fragment>
           <StatusBar barStyle="dark-content" />
-          <SafeAreaView>
-            <ScrollView
-              contentInsetAdjustmentBehavior="automatic" //This property specifies how the safe area insets are used to modify the content area of the scroll view.
-              style={styles.scrollView}
-            >
-              {/* <View style={styles.body}>
-                <Text style={styles.introTitle}> TRICKHANA GAME 5 </Text>
-              </View> */}
-
-              <CoolButton
+          
+          <CoolButton
                 onPress={() => {
                   this.isPassed();
                 }}
@@ -71,8 +63,7 @@ export default class Game5 extends React.Component {
                 color="white"
                 accessibilityLabel="Go to passed"
               />
-            </ScrollView>
-          </SafeAreaView>
+
         </Fragment>
         </ImageBackground>
       );

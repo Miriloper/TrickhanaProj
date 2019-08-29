@@ -59,24 +59,15 @@ export default class Game2 extends React.Component {
         <ImageBackground source={require('../../public/images/camara-saycheese.png')} style={{width: '100%', height: '100%'}}>
         <Fragment>
         <StatusBar barStyle="dark-content" />
-        <SafeAreaView>
-          <ScrollView
-            contentInsetAdjustmentBehavior="automatic" //This property specifies how the safe area insets are used to modify the content area of the scroll view.
-            style={styles.scrollView}>
-          
-            {/* <View style={styles.body}>
-              <Text style={styles.introTitle}> TRICKHANA GAME 2</Text>
-            </View> */}
 
-            <CoolButton 
+        <CoolButton 
             onPress={()=>{this.isPassed()}}
             title="Passed"
             color="white"
             accessibilityLabel="Go to passed"
             />
 
-          </ScrollView>
-        </SafeAreaView>
+            
       </Fragment>
       </ImageBackground>
       )
